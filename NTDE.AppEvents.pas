@@ -78,8 +78,8 @@ type
     FOnScreenOn: TNotifyEvent;
     FOnScreenOff: TNotifyEvent;
     function HandleAppEvent(AAppEvent: TApplicationEvent; AContext: TObject): Boolean;
-    procedure DoOnScreenOn;
-    procedure DoOnScreenOff;
+    procedure DoScreenOn;
+    procedure DoScreenOff;
   public
     constructor Create(AOwner: TComponent); override;
     procedure BeforeDestruction; override;
@@ -149,13 +149,13 @@ begin
   Result := True;
 end;
 
-procedure TNTDEAppEvents.DoOnScreenOff;
+procedure TNTDEAppEvents.DoScreenOff;
 begin
   if Assigned(FOnScreenOff) then
     FOnScreenOff(Self);
 end;
 
-procedure TNTDEAppEvents.DoOnScreenOn;
+procedure TNTDEAppEvents.DoScreenOn;
 begin
   if Assigned(FOnScreenOn) then
     FOnScreenOn(Self);
@@ -175,9 +175,9 @@ begin
   if Assigned(FOwner) then
   begin
     if intent.getAction.equals(TJIntent.JavaClass.ACTION_SCREEN_ON) then
-      FOwner.DoOnScreenOn
+      FOwner.DoScreenOn
     else if intent.getAction.equals(TJIntent.JavaClass.ACTION_SCREEN_OFF) then
-      FOwner.DoOnScreenOff;
+      FOwner.DoScreenOff;
   end;
 end;
 
